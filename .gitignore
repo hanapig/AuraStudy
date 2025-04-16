@@ -1,0 +1,14 @@
+*.sln
+*.exp
+*.pdb
+DerivedDataCache/
+Intermediate/
+Saved/
+WindowsNoEditor/
+Content/Developers/
+Developer/
+.vs/
+idea/
+*.user
+*.tmp
+.idea/
