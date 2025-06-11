@@ -1,11 +1,12 @@
-﻿// Fill out your copyright notice in the Description page of Project Settings.
-
+﻿
 #pragma once
 
 #include "CoreMinimal.h"
 #include "BaseCharacter.h"
 #include "GameFramework/Character.h"
+#include  "GameFramework/CharacterMovementComponent.h"
 #include "PlayerCharacter.generated.h"
+
 
 UCLASS()
 class AURA_API APlayerCharacter : public ABaseCharacter

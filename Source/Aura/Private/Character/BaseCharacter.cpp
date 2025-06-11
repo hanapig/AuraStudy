@@ -3,7 +3,7 @@
 
 #include "Character/BaseCharacter.h"
 
-// Sets default values
+//敌人和玩家都继承该基类
 ABaseCharacter::ABaseCharacter()
 {
  	

@@ -44,5 +44,12 @@ void APlayerControllerBase::Move(const struct FInputActionValue& InputActionValu
 	const FRotator InputRotation=GetControlRotation();
 	const FRotator InputAxis(0.f,InputRotation.Yaw,0.f);
 	
-	
+	const FVector ForwardVector=FRotationMatrix(InputAxis).GetUnitAxis(EAxis::X);
+	const FVector RightVector=FRotationMatrix(InputAxis).GetUnitAxis(EAxis::Y);
+
+	if(APawn*ControllerPawn=GetPawn<APawn>())
+	{
+		ControllerPawn->AddMovementInput(ForwardVector,InputAxisVector.Y);
+		ControllerPawn->AddMovementInput(RightVector,InputAxisVector.X);
+	}
 }
