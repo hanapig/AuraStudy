@@ -53,3 +53,47 @@ void APlayerControllerBase::Move(const struct FInputActionValue& InputActionValu
 		ControllerPawn->AddMovementInput(RightVector,InputAxisVector.X);
 	}
 }
+
+
+void APlayerControllerBase::PlayerTick(float DeltaTime)
+{
+	Super::PlayerTick(DeltaTime);
+	CursorTrace();
+}
+
+void APlayerControllerBase::CursorTrace()
+{
+	FHitResult HitResult;
+	GetHitResultUnderCursor(ECC_Visibility,false,HitResult);
+	if (!HitResult.bBlockingHit) return;//没有命中或者被阻挡返回
+
+	LastActor=CurrentActor;
+	CurrentActor= Cast<IEnemyInterFace>(HitResult.GetActor());
+
+	if(LastActor==nullptr)
+	{
+		if (CurrentActor!=nullptr)
+		{
+			CurrentActor->HighLightActor();
+		}
+	}
+
+	else
+	{
+		if(CurrentActor==nullptr)
+		{
+			LastActor->UnHighLightActor();
+		}
+
+		else
+		{
+			if(LastActor != CurrentActor)
+			{
+			
+				LastActor->UnHighLightActor();
+				CurrentActor->HighLightActor();
+			} 
+		}
+	}
+
+}

@@ -9,6 +9,7 @@
 #include "EnhancedInputSubsystems.h"      
 #include "InputAction.h"                 
 #include "InputMappingContext.h"            
+#include "Tools/EnemyInterFace.h"
 #include "PlayerControllerBase.generated.h"
 
 /**
@@ -22,6 +23,8 @@ class AURA_API APlayerControllerBase : public APlayerController
 public:
 
 	APlayerControllerBase();
+
+	virtual void PlayerTick(float DeltaTime) override;
 	
 protected:
 	virtual void BeginPlay() override;
@@ -35,5 +38,9 @@ private:
 	TObjectPtr<UInputAction> MoveAction;
 
 	void Move(const struct FInputActionValue& InputActionValue);
+
+	void CursorTrace();//鼠标追踪获取
+	IEnemyInterFace*LastActor;//有接口的上一个物体
+	IEnemyInterFace*CurrentActor;//有接口的当前物体
 
 };

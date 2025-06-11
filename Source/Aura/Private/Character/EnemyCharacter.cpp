@@ -24,9 +24,15 @@ void AEnemyCharacter::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-// Called to bind functionality to input
-void AEnemyCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+void AEnemyCharacter::HighLightActor()
 {
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	bHighlighted=true;
 }
+
+void AEnemyCharacter::UnHighLightActor()
+{
+	bHighlighted=false;
+}
+
+
 

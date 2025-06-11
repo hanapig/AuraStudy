@@ -4,10 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "BaseCharacter.h"
+#include "Tools/EnemyInterFace.h"
 #include "EnemyCharacter.generated.h"
 
 UCLASS()
-class AURA_API AEnemyCharacter : public ABaseCharacter
+class AURA_API AEnemyCharacter : public ABaseCharacter,public IEnemyInterFace
 {
 	GENERATED_BODY()
 
@@ -23,6 +24,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	virtual  void HighLightActor() override;
+	virtual void UnHighLightActor() override;
+
+	UPROPERTY(BlueprintReadOnly) //蓝图可读
+	bool bHighlighted = false; //是否高亮
 };
