@@ -3,10 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AbilitySystemComponent.h"
 #include "GameFramework/Character.h"
 #include "BaseCharacter.generated.h"
 
-UCLASS()
+class UAbilitySystemComponent;
+class UAttributeSet;
+
+UCLASS(Abstract)
 class AURA_API ABaseCharacter : public ACharacter
 {
 	GENERATED_BODY()
@@ -22,4 +26,10 @@ protected:
 	UPROPERTY(EditAnywhere,Category="Combat")
 	TObjectPtr<USkeletalMeshComponent>Weapon;
 
+	UPROPERTY()
+	TObjectPtr<UAbilitySystemComponent>AbilitySystemComponent;
+
+	UPROPERTY()
+	TObjectPtr<UAttributeSet>AttributeSet;
+	
 };

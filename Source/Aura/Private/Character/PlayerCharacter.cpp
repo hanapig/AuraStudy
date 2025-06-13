@@ -3,6 +3,9 @@
 
 #include "Character/PlayerCharacter.h"
 
+#include "EditorFontGlyphs.h"
+#include "Player/PlayerStateBase.h"
+
 
 // Sets default values
 APlayerCharacter::APlayerCharacter()
@@ -20,10 +23,40 @@ APlayerCharacter::APlayerCharacter()
 }
 
 
+UAbilitySystemComponent* APlayerCharacter::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
+}
+
+void APlayerCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	InitAbility();
+	SetOwner(NewController);
+}
+
+void APlayerCharacter::OnRep_PlayerState()
+{
+	Super::OnRep_PlayerState();
+
+	InitAbility();
+}
+
+
+void APlayerCharacter::InitAbility()
+{
+	APlayerStateBase*PlayStateBase=GetPlayerState<APlayerStateBase>();
+	AbilitySystemComponent=PlayStateBase->GetAbilitySystemComponent();
+	AttributeSet=PlayStateBase->GetAttributeSet();
+	AbilitySystemComponent->InitAbilityActorInfo(PlayStateBase, this);
+}
+
 void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
+
 
 

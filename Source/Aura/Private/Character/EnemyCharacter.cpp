@@ -2,6 +2,8 @@
 
 
 #include "Character/EnemyCharacter.h"
+#include "Gas/AbilitySystemComponentBase.h"
+#include "Gas/AttributeSetBase.h"
 
 
 // Sets default values
@@ -9,13 +11,21 @@ AEnemyCharacter::AEnemyCharacter()
 {
 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	GetMesh()->SetCollisionResponseToChannel(ECC_Visibility,ECR_Block);
+	
 }
 
 // Called when the game starts or when spawned
 void AEnemyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	if (AbilitySystemComponent)
+	{
+		AbilitySystemComponent->InitAbilityActorInfo(this, this);
+		AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
+	}
 }
 
 // Called every frame
