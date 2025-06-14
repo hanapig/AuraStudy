@@ -13,19 +13,19 @@ AEnemyCharacter::AEnemyCharacter()
 	PrimaryActorTick.bCanEverTick = true;
 
 	GetMesh()->SetCollisionResponseToChannel(ECC_Visibility,ECR_Block);
-	
+	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponentBase>("AbilitySystemComponent");
+	AbilitySystemComponent->SetIsReplicated(true);
+	AttributeSet = CreateDefaultSubobject<UAttributeSetBase>("AttributeSet");
 }
 
 // Called when the game starts or when spawned
 void AEnemyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+	
+	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
 
-	if (AbilitySystemComponent)
-	{
-		AbilitySystemComponent->InitAbilityActorInfo(this, this);
-		AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
-	}
 }
 
 // Called every frame

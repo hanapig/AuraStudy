@@ -25,7 +25,8 @@ APlayerCharacter::APlayerCharacter()
 
 UAbilitySystemComponent* APlayerCharacter::GetAbilitySystemComponent() const
 {
-	return AbilitySystemComponent;
+	APlayerStateBase*PlayerStateBase = GetPlayerState<APlayerStateBase>();
+	return PlayerStateBase->GetAbilitySystemComponent();
 }
 
 void APlayerCharacter::PossessedBy(AController* NewController)
@@ -48,6 +49,7 @@ void APlayerCharacter::InitAbility()
 {
 	APlayerStateBase*PlayStateBase=GetPlayerState<APlayerStateBase>();
 	AbilitySystemComponent=PlayStateBase->GetAbilitySystemComponent();
+	check(PlayStateBase);
 	AttributeSet=PlayStateBase->GetAttributeSet();
 	AbilitySystemComponent->InitAbilityActorInfo(PlayStateBase, this);
 }

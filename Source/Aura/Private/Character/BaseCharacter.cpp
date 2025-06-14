@@ -11,10 +11,7 @@ ABaseCharacter::ABaseCharacter()
 	Weapon=CreateDefaultSubobject<USkeletalMeshComponent>("Weapon");
 	Weapon->SetupAttachment(GetMesh(),"WeaponHandSocket");
 	Weapon->SetCollisionEnabled(ECollisionEnabled::NoCollision);
-
-	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>("AbilitySystemComponent");
-	AbilitySystemComponent->SetIsReplicated(true);
-	AttributeSet = CreateDefaultSubobject<UAttributeSet>("AttributeSet");
+	
 }
 
 

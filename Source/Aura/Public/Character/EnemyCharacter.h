@@ -29,4 +29,5 @@ public:
 
 	UPROPERTY(BlueprintReadOnly) //蓝图可读
 	bool bHighlighted = false; //是否高亮
+	
 };
