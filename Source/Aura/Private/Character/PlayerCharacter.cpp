@@ -2,9 +2,10 @@
 
 
 #include "Character/PlayerCharacter.h"
-
 #include "EditorFontGlyphs.h"
+#include "Player/PlayerControllerBase.h"
 #include "Player/PlayerStateBase.h"
+#include "UI/HUDBase.h"
 
 
 // Sets default values
@@ -47,11 +48,24 @@ void APlayerCharacter::OnRep_PlayerState()
 
 void APlayerCharacter::InitAbility()
 {
-	APlayerStateBase*PlayStateBase=GetPlayerState<APlayerStateBase>();
-	AbilitySystemComponent=PlayStateBase->GetAbilitySystemComponent();
-	check(PlayStateBase);
-	AttributeSet=PlayStateBase->GetAttributeSet();
-	AbilitySystemComponent->InitAbilityActorInfo(PlayStateBase, this);
+	
+		APlayerStateBase* PlayerStateBase = GetPlayerState<APlayerStateBase>();
+		check(PlayerStateBase); 
+		//从playerState获取ASC和AS
+		AbilitySystemComponent = PlayerStateBase->GetAbilitySystemComponent();
+		AttributeSet = PlayerStateBase->GetAttributeSet();
+		//初始化ASC
+		AbilitySystemComponent->InitAbilityActorInfo(PlayerStateBase, this);
+
+		//获取PC
+		if(APlayerControllerBase* PlayerControllerBase = Cast<APlayerControllerBase>(GetController()))
+		{
+			if(AHUDBase* HUD = Cast<AHUDBase>(PlayerControllerBase->GetHUD()))
+			{
+				HUD->InitOverlay(PlayerControllerBase, PlayerStateBase, AbilitySystemComponent, AttributeSet);
+			}
+		}
+	
 }
 
 void APlayerCharacter::BeginPlay()
