@@ -27,6 +27,8 @@ void AHUDBase::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySyst
 	OverlayWidgetController = GetOverlayWidgetController(WidgetControllerParams); 
 
 	OverlayWidget->SetWidgetController(OverlayWidgetController); //设置用户控件的控制器层
+	OverlayWidgetController->BroadCastInitValue();
+	OverlayWidgetController->BindCallValueBack();
 	
 	Widget->AddToViewport(); 
 

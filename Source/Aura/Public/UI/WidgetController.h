@@ -45,6 +45,10 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void SetWidgetControllerParams(const FWidgetControllerParams& WCParams);
 
+	virtual void BroadCastInitValue();
+
+	virtual void BindCallValueBack();
+
 protected:
 
 	UPROPERTY(BlueprintReadOnly, Category="WidgetController")
